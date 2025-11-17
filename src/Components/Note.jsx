@@ -12,12 +12,16 @@ export default function Note(props) {
                     rounded-lg 
                     shadow-md 
                     p-3 
+                    pb-8  {/* 💡 Increased bottom padding (pb-8) to make room for the button */}
                     relative 
                     min-h-[100px] 
                     hover:shadow-xl 
                     transition duration-200">
+      
       <h1 className="text-xl font-bold mb-1">{props.title}</h1>
-      <p className="text-gray-700 text-base mb-10 whitespace-pre-wrap">{props.content}</p>
+      
+      {/* Reduced bottom margin on content to look cleaner */}
+      <p className="text-gray-700 text-base mb-2 whitespace-pre-wrap">{props.content}</p> 
       
       <button 
         onClick={handleClick}
@@ -25,15 +29,20 @@ export default function Note(props) {
                    right-2 
                    bottom-2 
                    bg-transparent 
-                   border-none 
+                   border-2 border-yellow-500  {/* Added a subtle border for a cleaner look */}
                    text-yellow-500 
-                   w-9 
-                   h-9 
+                   rounded-full  {/* Ensures it's a circular target */}
+                   w-8 
+                   h-8 
+                   flex items-center justify-center  {/* Centers the text/icon inside the circle */}
                    cursor-pointer 
-                   hover:text-yellow-700 
-                   focus:outline-none"
+                   hover:bg-black-500 
+                   hover:text-black-100 
+                   focus:outline-none 
+                   transition-colors"
       >
-        Delete
+        {/* Use a simple character or icon for better alignment */}
+        &#x2715; 
       </button>
     </div>
   );

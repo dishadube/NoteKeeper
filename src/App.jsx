@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Header from './Components/Header'
-import CreateArea from './Components/CreateArea' 
-import Footer from './Components/Footer'
+import CreateArea from '../src/Components/CreatArea' 
+import Footer from '../src/Components/Footer'
 import Note from './Components/Note'
 import Search from './Components/Search/Search' 
 

@@ -1,13 +1,9 @@
-// src/App.jsx
-
 import React, { useState, useEffect } from 'react'
 import Header from './Components/Header'
-import CreatArea from './Components/CreatArea' // Corrected capitalization CreatArea -> CreateArea
+import CreateArea from './Components/CreateArea' 
 import Footer from './Components/Footer'
 import Note from './Components/Note'
-// 💡 New Import for the Search component
 import Search from './Components/Search/Search' 
-
 
 export default function App() {
   const [notes, setNotes] = useState(() => {
@@ -21,7 +17,6 @@ export default function App() {
     localStorage.setItem('notes', JSON.stringify(notes));
   }, [notes]);
 
-  // ... (addNote and deleteNote functions remain the same) ...
   function addNote(newNote) {
     const noteWithId = {
         ...newNote,
@@ -37,8 +32,6 @@ export default function App() {
   function handleSearch(event) {
     setSearchTerm(event.target.value);
   }
-  // ... (end of addNote and deleteNote) ...
-
 
   const filteredNotes = notes.filter(note => {
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
@@ -49,31 +42,35 @@ export default function App() {
   });
 
   return (  
-    <div>
+    <div className="min-h-screen bg-gray-100 font-sans">
       <Header/>
       
-      {/* 💡 Rendering the new Search component here */}
       <Search 
         onSearch={handleSearch}
         searchTerm={searchTerm}
       />
       
-      {/* The CreateArea component, now only handling note creation */}
-      <CreatArea onAdd={addNote}/>  
+      <CreateArea onAdd={addNote}/>  
       
-      {/* ... (Note mapping remains the same) ... */}
-      {filteredNotes.map((note) => (
-        <Note 
-          key={note.id} 
-          id={note.id} 
-          title={note.title} 
-          content={note.content} 
-          onDelete={deleteNote} 
-        />
-      ))}
+      {/* Tailwind Responsive Grid Container */}
+      <div className="grid gap-4 p-4 pb-16 
+                      sm:grid-cols-2 
+                      lg:grid-cols-3 
+                      xl:grid-cols-4 
+                      sm:px-8">
+        {filteredNotes.map((note) => (
+          <Note 
+            key={note.id} 
+            id={note.id} 
+            title={note.title} 
+            content={note.content} 
+            onDelete={deleteNote} 
+          />
+        ))}
+      </div>
       
       {filteredNotes.length === 0 && notes.length > 0 && searchTerm.trim() !== '' && (
-          <p className="no-results-message">No notes found matching "{searchTerm}"</p>
+          <p className="text-center mt-8 text-gray-500 italic w-full">No notes found matching "{searchTerm}"</p>
       )}
 
       <Footer/>

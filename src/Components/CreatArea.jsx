@@ -1,12 +1,8 @@
-// src/Components/CreateArea.jsx
-
 import React, { useState } from "react";
-// Removed Search import
 
 export default function CreateArea(props) {
   const [note, setNote] = useState({ title: "", content: "" });
   const [isExpanded, setExpanded] = useState(false); 
-  // Removed isSearchVisible state
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -28,20 +24,36 @@ export default function CreateArea(props) {
 
   function expand() {
     setExpanded(true);
-    // Removed call to setSearchVisible(false);
   }
 
   return (
     <div className="create-area">
-      {/* Removed the search-container and all search logic from here. 
-        It will be rendered separately in App.jsx.
-      */}
-      
-      {/* Note Creation Form */}
-      <form className="create-note" onSubmit={handleSubmit}>
+      {/* Note Creation Form - Centered and Styled */}
+      <form 
+        className="create-note 
+                   relative 
+                   w-[90%] 
+                   max-w-[600px] 
+                   mx-auto 
+                   my-8 
+                   bg-white 
+                   p-4 
+                   rounded-lg 
+                   shadow-md 
+                   md:shadow-lg" 
+        onSubmit={handleSubmit}
+      >
         {isExpanded && (
           <input
-            className="title"
+            className="title 
+                       w-full 
+                       border-none 
+                       p-1 
+                       text-xl 
+                       font-semibold 
+                       resize-none 
+                       outline-none 
+                       mb-2"
             name="title"
             placeholder="Title"
             onChange={handleChange}
@@ -49,7 +61,13 @@ export default function CreateArea(props) {
           />
         )}
         <textarea
-          className="textarea"
+          className="textarea 
+                     w-full 
+                     border-none 
+                     p-1 
+                     text-base 
+                     resize-none 
+                     outline-none"
           name="content"
           rows={isExpanded ? 3 : 1}
           onChange={handleChange}
@@ -58,7 +76,28 @@ export default function CreateArea(props) {
           onClick={expand}
           onFocus={expand}
         />
-        {isExpanded && <button type="submit">Add</button>}
+        {/* Add Button - Absolute positioned at the bottom right */}
+        {isExpanded && (
+          <button 
+            type="submit"
+            className="absolute 
+                       right-4 
+                       bottom-[-18px] 
+                       bg-yellow-500 
+                       text-white 
+                       border-none 
+                       rounded-full 
+                       w-9 
+                       h-9 
+                       shadow-md 
+                       hover:bg-yellow-600 
+                       focus:outline-none 
+                       focus:ring-2 focus:ring-yellow-500 
+                       z-10"
+          >
+            Add
+          </button>
+        )}
       </form>
     </div>
   );
